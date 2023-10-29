@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">SimpleNavigationFragments</string>
+    <string name="text_registro_fragment">Fragment Registro</string>
+
+    <!-- Strings of the MainActivity -->
+    <string name="inicio_text">Inicio</string>
+
+    <!-- Strings Inicio Fragment -->
+    <string name="inicio_iniciar_sesion">Iniciar sesión</string>
+    <string name="inicio_registro">Registro</string>
+
+    <!-- Strings Iniciar Sesión Fragment -->
+    <string name="ini_ses_title_toolbar">Iniciar sesión</string>
+    <string name="ini_ses_usuario">Usuario</string>
+    <string name="ini_ses_contrasena">Contraseña</string>
+    <string name="ini_ses_btn_ingresar">Ingresar</string>
+
+    <!-- Strings Registro Fragment -->
+    <string name="reg_title_toolbar">Registro</string>
+    <string name="reg_usuario">Usuario</string>
+    <string name="reg_nombre">Nombre</string>
+    <string name="reg_apellido">Apellido</string>
+    <string name="reg_contrasena">Contraseña</string>
+    <string name="reg_contrasena_de_nuevo">Contraseña de nuevo</string>
+    <string name="reg_btn_registrar">Registrar</string>
+    <string name="reg_btn_limpiar">Limpiar</string>
+
+    <!-- Strings Principal Fragment -->
+    <string name="prin_title_toolbar">Principal</string>
+    <string name="icon_item_close">Cerrar</string>
+
+    <!-- Strings Cuenta Fragment -->
+    <string name="cuen_title_toolbar">Cuenta</string>
+
+    <!-- Strings Configuración Fragment -->
+    <string name="config_title_toolbar">Configuración</string>
+
+    <!-- Strings Bottom Navigation Menu items -->
+    <string name="bottom_nav_menu_it_principal">Principal</string>
+    <string name="bottom_nav_menu_it_cuenta">Cuenta</string>
+    <string name="bottom_nav_menu_it_configuracion">Configuración</string>
+
+    <string name="fragment_custom_messages">Hola, %1$s. Este es el Fragmento %2$s.</string>
+
+
+</resources>

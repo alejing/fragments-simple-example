@@ -110,6 +110,8 @@ class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListen
         super.onResume()
         // Call of the updateToolBarTextView function with the new ToolBar Title
         updateToolBarTextView(root.resources.getString(R.string.ini_ses_title_toolbar))
+        // Put again the ToolBar when the app has been the focus
+        toolBar.isVisible = true
     }
 
     override fun onStop() {

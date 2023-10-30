@@ -83,6 +83,8 @@ class RegistroFragment : Fragment(), MainActivity.FragmentInteractionListener {
         super.onResume()
         // Call of the updateToolBarTextView function with the new ToolBar Title
         updateToolBarTextView(root.resources.getString(R.string.reg_title_toolbar))
+        // Put again the ActionBar when when the Fragment appears
+        toolBar.isVisible = true
     }
 
     override fun onStop() {

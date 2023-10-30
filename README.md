@@ -3,8 +3,8 @@
   
 Repositorio de código que muestra simples interacciones (navegación, safeArgs, sharedPreferences, room, entre otras) con fragmentos.
   
-Este es un proyecto en construcción, basado inicialmente del siguiente archivo de [diseño en Figma](https://www.figma.com/proto/aLbXUI5R5g2DwjHh4eLjRo/Navegaci%C3%B3n?type=design&node-id=1-2&t=ymAzHLfHUGJL1jEQ-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2), construido como actividad introductoria para entender el principio de navegación en Android.
-  
+Este es un proyecto en construcción, basado inicialmente del siguiente archivo de <a href="https://www.figma.com/proto/aLbXUI5R5g2DwjHh4eLjRo/Navegaci%C3%B3n?type=design&node-id=1-2&t=ymAzHLfHUGJL1jEQ-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2" target="_blank">diseño en Figma</a>, construido como actividad introductoria para entender el principio de navegación en Android.
+
 Actualmente presenta las ramas:
 
 - **main:** rama principal con el proyecto actualizado completamente.

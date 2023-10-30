@@ -1,17 +1,24 @@
 package com.example.simplenavigationfragments.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.simplenavigationfragments.MainActivity
 import com.example.simplenavigationfragments.R
+import com.example.simplenavigationfragments.database.AppDatabase
+import com.example.simplenavigationfragments.database.user.UserDao
+import com.example.simplenavigationfragments.database.user.Usuario
 import com.example.simplenavigationfragments.databinding.FragmentIniciarSesionBinding
 import com.google.android.material.appbar.MaterialToolbar
+import kotlinx.coroutines.launch
 
 
 class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListener {
@@ -22,6 +29,19 @@ class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListen
     private val binding get() = _binding!!
     private lateinit var root: View
     private lateinit var toolBar: MaterialToolbar
+    private lateinit var sharedPreferences: SharedPreferences
+
+    // Database data configurations
+    private val database: AppDatabase by lazy {
+        AppDatabase.getDatabase(requireActivity().baseContext)
+    }
+    private lateinit var userDao: UserDao
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Create the userDao from Database
+        userDao = database.UserDao()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,27 +57,53 @@ class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListen
         toolBar.isVisible = true
 
         // Create the sharedPreferences file
-        val sharedPreferences = requireActivity().getSharedPreferences(
+        sharedPreferences = requireActivity().getSharedPreferences(
             "MyAppPreferences", Context.MODE_PRIVATE
         )
 
-        // Navigate to Principal Fragment with Safe Args
-        binding.btnIngresar.setOnClickListener {
-
-            // Edit the sharedPreferences file with the user
-            val editor = sharedPreferences?.edit()
-            val user = binding.usuario.editText?.text.toString()
-            editor?.putString("user", user)
-            editor?.apply()
-            // Navigate
-            findNavController().navigate(
-                IniciarSesionFragmentDirections.actionIniciarSesionFragmentToPrincipalFragment(
-                    user = user
-                )
-            )
+        // Get all the users from the database and show in the console
+        lifecycleScope.launch {
+            val users = userDao.getAll()
+            //println("users $users")
+            for (user in users) {
+                println("${user.id}. ${user.user}, ${user.name}, ${user.lastName}, ${user.password}")
+            }
         }
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Navigate to Principal Fragment with Safe Args
+        binding.btnIngresar.setOnClickListener {
+            // Edit the sharedPreferences file with the user
+            val editor = sharedPreferences.edit()
+            lifecycleScope.launch {
+
+                // Catch the user and password from the UI and search in the database
+                val user = userDao.getUserById(
+                    binding.usuario.editText?.text.toString(),
+                    binding.contraseA.editText?.text.toString()
+                )
+                // Check if the user exist
+                if (user != null) {
+                    //println("user: ${user.user} and password: ${user.password}")
+                    editor?.putString("user", user.user)
+                    editor?.apply()
+                    // Navigate
+                    findNavController().navigate(
+                        IniciarSesionFragmentDirections.actionIniciarSesionFragmentToPrincipalFragment(
+                            user = user.user
+                        )
+                    )
+                }else {
+                    Toast.makeText(requireContext(), "Usuario y/o contraseña no existe.", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
     }
 
     override fun onResume() {

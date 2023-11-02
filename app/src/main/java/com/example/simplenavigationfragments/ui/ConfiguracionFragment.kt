@@ -92,6 +92,10 @@ class ConfiguracionFragment : Fragment(), MainActivity.FragmentInteractionListen
         super.onResume()
         // Call of the updateToolBarTextView function with the new ToolBar Title
         updateToolBarTextView(root.resources.getString(R.string.config_title_toolbar))
+        // Put again the ActionBar when the Fragment appears
+        toolBar.isVisible = true
+        // Put the BottomNavigationView when the Fragment appears
+        bottomBar.isGone = false
     }
 
     override fun onStop() {

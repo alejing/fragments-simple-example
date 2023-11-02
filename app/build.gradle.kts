@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     // Add the SafeArgs functionality to the project
     id("androidx.navigation.safeargs.kotlin")
+    // Add KSP for Kotlin
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -42,6 +44,15 @@ android {
 }
 
 dependencies {
+
+    // Room dependencies
+    val roomVersion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    // To use Kotlin Symbol Processing (KSP)
+    ksp("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
 
     // Navigation Component
     val navVersion = "2.7.4"

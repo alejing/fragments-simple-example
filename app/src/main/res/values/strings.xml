@@ -14,6 +14,9 @@
     <string name="ini_ses_usuario">Usuario</string>
     <string name="ini_ses_contrasena">Contraseña</string>
     <string name="ini_ses_btn_ingresar">Ingresar</string>
+    <string name="ini_error_user">Error: Usuario incorrecto.</string>
+    <string name="ini_error_password">Error: Contraseña incorrecta.</string>
+    <string name="ini_error_user_password">Error: Usuario y/o contraseña incorrecta. Por favor intente de nuevo.</string>
 
     <!-- Strings Registro Fragment -->
     <string name="reg_title_toolbar">Registro</string>
@@ -24,6 +27,7 @@
     <string name="reg_contrasena_de_nuevo">Contraseña de nuevo</string>
     <string name="reg_btn_registrar">Registrar</string>
     <string name="reg_btn_limpiar">Limpiar</string>
+    <string name="reg_registered_user">Usuario registrado existosamente.</string>
 
     <!-- Strings Principal Fragment -->
     <string name="prin_title_toolbar">Principal</string>
@@ -44,6 +48,7 @@
     <string name="bottom_nav_menu_it_configuracion">Configuración</string>
 
     <string name="fragment_custom_messages">Hola, %1$s. Este es el Fragmento %2$s.</string>
+
 
 
 

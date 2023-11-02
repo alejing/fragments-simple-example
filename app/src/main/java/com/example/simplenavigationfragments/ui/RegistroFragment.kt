@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
 import com.example.simplenavigationfragments.MainActivity
 import com.example.simplenavigationfragments.R
 import com.example.simplenavigationfragments.database.AppDatabase
@@ -16,6 +14,7 @@ import com.example.simplenavigationfragments.database.user.UserDao
 import com.example.simplenavigationfragments.database.user.Usuario
 import com.example.simplenavigationfragments.databinding.FragmentRegistroBinding
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class RegistroFragment : Fragment(), MainActivity.FragmentInteractionListener {
@@ -69,7 +68,12 @@ class RegistroFragment : Fragment(), MainActivity.FragmentInteractionListener {
                 // TODO After insert, check if the password field and confirmPassword are the same
                 val userToInsert = Usuario(0, user, name, lastName, password)
                 userDao.insertUser(userToInsert)
-                Toast.makeText(requireContext(), "Usuario Registrado", Toast.LENGTH_SHORT).show()
+                // Snack bar to see the user added successfully
+                Snackbar.make(
+                    view,
+                    root.resources.getString(R.string.reg_registered_user),
+                    Snackbar.LENGTH_LONG
+                ).show()
                 clearFields()
             }
         }

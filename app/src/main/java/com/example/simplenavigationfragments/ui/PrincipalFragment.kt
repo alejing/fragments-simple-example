@@ -81,7 +81,8 @@ class PrincipalFragment : Fragment(), MainActivity.FragmentInteractionListener, 
             val users = userDao.getAll()
             //println("users $users")
 
-            // TODO
+            // Put the ItemAdapter to the recyclerView.adapter
+            //binding.recyclerView.adapter = ItemAdapter(findNavController(),requireContext(), users)
             binding.recyclerView.adapter = ItemAdapter(requireContext(), users)
             binding.recyclerView.setHasFixedSize(true)
 
@@ -108,16 +109,13 @@ class PrincipalFragment : Fragment(), MainActivity.FragmentInteractionListener, 
                 else -> false
             }
         }
-
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         // Disable the native back button functionality
         setupBackPressListener()
-
     }
 
     override fun onResume() {

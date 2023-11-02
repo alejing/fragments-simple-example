@@ -61,15 +61,6 @@ class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListen
             "MyAppPreferences", Context.MODE_PRIVATE
         )
 
-        // Get all the users from the database and show in the console
-        lifecycleScope.launch {
-            val users = userDao.getAll()
-            //println("users $users")
-            for (user in users) {
-                println("${user.id}. ${user.user}, ${user.name}, ${user.lastName}, ${user.password}")
-            }
-        }
-
         return root
     }
 

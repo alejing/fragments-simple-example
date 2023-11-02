@@ -15,13 +15,19 @@ import androidx.core.view.MenuProvider
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.simplenavigationfragments.MainActivity
 import com.example.simplenavigationfragments.R
+import com.example.simplenavigationfragments.database.AppDatabase
+import com.example.simplenavigationfragments.database.user.UserDao
+import com.example.simplenavigationfragments.database.user.Usuario
 import com.example.simplenavigationfragments.databinding.FragmentPrincipalBinding
+import com.example.simplenavigationfragments.ui.adapter.ItemAdapter
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 
 class PrincipalFragment : Fragment(), MainActivity.FragmentInteractionListener, MenuProvider {
@@ -34,8 +40,17 @@ class PrincipalFragment : Fragment(), MainActivity.FragmentInteractionListener, 
     private lateinit var bottomBar: BottomNavigationView
     private lateinit var toolBar: MaterialToolbar
 
-    // Access to sent args by the IniciarSesionFragment
-    val args: PrincipalFragmentArgs by navArgs()
+    // Database data configurations
+    private val database: AppDatabase by lazy {
+        AppDatabase.getDatabase(requireActivity().baseContext)
+    }
+    private lateinit var userDao: UserDao
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Create the userDao from Database
+        userDao = database.UserDao()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +75,21 @@ class PrincipalFragment : Fragment(), MainActivity.FragmentInteractionListener, 
         // Help to control the menu in this specific Fragment
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        // Get all the users from the database and show in the console
+        lifecycleScope.launch {
+            val users = userDao.getAll()
+            //println("users $users")
+
+            // TODO
+            binding.recyclerView.adapter = ItemAdapter(requireContext(), users)
+            binding.recyclerView.setHasFixedSize(true)
+
+            //for (user in users) {
+            //    println("${user.id}. ${user.user}, ${user.name}, ${user.lastName}, ${user.password}")
+            //}
+        }
+
 
         // Navigation of the BottomNavigationView
         bottomBar.setOnItemSelectedListener {menuItem ->
@@ -88,17 +118,6 @@ class PrincipalFragment : Fragment(), MainActivity.FragmentInteractionListener, 
         // Disable the native back button functionality
         setupBackPressListener()
 
-        // Catch the args with the user (Safe Args)
-        //val user = args.user
-
-        // Read the sharedPreferences file
-        val sharedPreferences = context?.getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val user = sharedPreferences?.getString("user", "Unknown user")
-
-        // Put the user in the textView
-        binding.prinTextView.text = getString(
-            R.string.fragment_custom_messages, user, getString(R.string.prin_title_toolbar)
-        )
     }
 
     override fun onResume() {

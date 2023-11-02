@@ -28,6 +28,9 @@
     <!-- Strings Principal Fragment -->
     <string name="prin_title_toolbar">Principal</string>
     <string name="icon_item_close">Cerrar</string>
+    <string name="prin_item_user">Usuario: %1$s</string>
+    <string name="prin_item_name">Nombre: %1$s</string>
+    <string name="prin_item_last_name">Apellido: %1$s</string>
 
     <!-- Strings Cuenta Fragment -->
     <string name="cuen_title_toolbar">Cuenta</string>
@@ -41,6 +44,7 @@
     <string name="bottom_nav_menu_it_configuracion">Configuración</string>
 
     <string name="fragment_custom_messages">Hola, %1$s. Este es el Fragmento %2$s.</string>
+
 
 
 </resources>

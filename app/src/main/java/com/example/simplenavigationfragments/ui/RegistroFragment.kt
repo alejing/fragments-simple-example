@@ -112,8 +112,8 @@ class RegistroFragment : Fragment(), MainActivity.FragmentInteractionListener {
         binding.apellido.editText?.text?.clear()
         binding.contrasena.editText?.text?.clear()
         binding.contrasenaNuevo.editText?.text?.clear()
-        // Put the focus on the EditText usuario
-        binding.usuario.editText?.requestFocus()
+        // Put the focus on the principal container
+        binding.container.requestFocus()
     }
 
 }

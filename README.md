@@ -17,6 +17,10 @@ Actualmente presenta las ramas:
   - Mejora en la experiencia de usuario controlando el ciclo de vida de los fragmentos.
   - Creación de Entidades, interfaces de conexion con las entidades (DAO) y bases de datos.
   - Manejo de CRUD básico con corrutinas.
+- **feature_list_of_users:** característica agregada para mostrar una lista de usuarios haciendo uso de un RecyclerView y el patrón Adapter.
+  - Se añade una lista en el fragmento Principal con los usuarios registrados en la base de datos local.
+  - Se mejoran algunos detalles en la documentación interna de cada archivo.
+  - Se añaden (o remplazan) mensajes básicos de confirmación por medio de simples Snackbars.
   
 Saludos.
   

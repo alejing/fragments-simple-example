@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,9 +14,9 @@ import com.example.simplenavigationfragments.MainActivity
 import com.example.simplenavigationfragments.R
 import com.example.simplenavigationfragments.database.AppDatabase
 import com.example.simplenavigationfragments.database.user.UserDao
-import com.example.simplenavigationfragments.database.user.Usuario
 import com.example.simplenavigationfragments.databinding.FragmentIniciarSesionBinding
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
@@ -61,15 +60,6 @@ class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListen
             "MyAppPreferences", Context.MODE_PRIVATE
         )
 
-        // Get all the users from the database and show in the console
-        lifecycleScope.launch {
-            val users = userDao.getAll()
-            //println("users $users")
-            for (user in users) {
-                println("${user.id}. ${user.user}, ${user.name}, ${user.lastName}, ${user.password}")
-            }
-        }
-
         return root
     }
 
@@ -99,7 +89,12 @@ class IniciarSesionFragment : Fragment(), MainActivity.FragmentInteractionListen
                         )
                     )
                 }else {
-                    Toast.makeText(requireContext(), "Usuario y/o contraseña no existe.", Toast.LENGTH_LONG).show()
+                    // Snack bar to see the error message
+                    Snackbar.make(
+                        view,
+                        root.resources.getString(R.string.ini_error_user_password),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
